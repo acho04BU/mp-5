@@ -19,7 +19,7 @@ export default function Home(){
               onSubmit={ async (event) => {
                   event.preventDefault();
                   createURL(page, short)
-                      .then((e)=> setCreated("true"))
+                      .then((e)=> setCreated(e))
                       .catch(error => console.log(error));
               }
 

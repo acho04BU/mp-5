@@ -16,7 +16,7 @@ export default async function createURL(original:string,short:string){
     let i = 0;
     for (i = 0; i < urls.length; i++) {
         if (urls[i].short == short) {
-            throw new Error ("URL Already Exists");
+            return ("URL Already Exists");
         }
     }
 
@@ -25,13 +25,15 @@ export default async function createURL(original:string,short:string){
     }catch(err){
         console.log(err);
     }
-    const res = await postsCollection.insertOne({original,short});
-    if (!res.acknowledged) {
-        throw new Error("DB insert failed");
+
+    if (original.indexOf("http") != 0){
+        return("Invalid URL");
     }
 
+    const res = await postsCollection.insertOne({original,short});
+    if (!res.acknowledged) {
+        return("DB insert failed");
+    }
 
-
-
-    //what do the 3 dots mean?
+    return "Success!";
 }
