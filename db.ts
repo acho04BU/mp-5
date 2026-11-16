@@ -1,5 +1,3 @@
-"use server"
-
 import {MongoClient,Db,Collection} from 'mongodb';
 import {URLProps} from "@/types";
 import {redirect} from "next/navigation";
