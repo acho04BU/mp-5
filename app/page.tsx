@@ -2,7 +2,7 @@
 
 import createURL from "@/components/CreateURL";
 import {useState} from "react";
-import {StyledForm} from "@/components/styles";
+import {StyledForm, StyledInput, StyledDiv} from "@/components/styles";
 
 
 
@@ -20,16 +20,19 @@ export default function Home(){
               }
 
               }>
-            <input
-                placeholder="full link"
-                value={page}
-                onChange={(e) => setPage(e.target.value)} //create a textbox that updates title
-            />
-            <input
-                placeholder="shortened link"
-                value={short}
-                onChange={(e) => setShort(e.target.value)}
-            />
+            <StyledDiv>
+                <StyledInput
+                    placeholder="full link"
+                    value={page}
+                    onChange={(e) => setPage(e.target.value)} //create a textbox that updates title
+                />
+                <StyledInput
+                    placeholder="shortened link"
+                    value={short}
+                    onChange={(e) => setShort(e.target.value)}
+                />
+            </StyledDiv>
+
             <h1>Create a shortened URL for any page!</h1>
             <div className="w-full flex justify-center">
                 <button
