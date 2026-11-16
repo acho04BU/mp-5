@@ -1,21 +1,17 @@
 "use client";
 
-import styled from "styled-components";
 import createURL from "@/components/CreateURL";
 import {useState} from "react";
+import {StyledForm} from "@/components/styles";
 
-const StyledDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
+
 
 export default function Home(){
     const [page, setPage] = useState("");
     const [short, setShort] = useState("");
     const [created,setCreated] = useState("");
     return(
-        <form className="w-96 rounded-xl p-4 bg-sky-400"
+        <StyledForm
               onSubmit={ async (event) => {
                   event.preventDefault();
                   createURL(page, short)
@@ -46,6 +42,6 @@ export default function Home(){
                 {created}
             </h3>
 
-        </form>
+        </StyledForm>
     )
 }
