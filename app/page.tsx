@@ -13,13 +13,39 @@ const StyledDiv = styled.div`
 export default function Home(){
     const [page, setPage] = useState("");
     const [short, setShort] = useState("");
+    const [created,setCreated] = useState("");
     return(
-        <StyledDiv>
-            <h1>Create a shortened URL for any page!</h1>
-            <input type="text" value={page} placeholder="original link" onChange={(e) => setPage(e.target.value)}/>
-            <input type="text" value={short} placeholder="shortened link" onChange={(e) => setShort(e.target.value)}/>
+        <form className="w-96 rounded-xl p-4 bg-sky-400"
+              onSubmit={ async (event) => {
+                  event.preventDefault();
+                  createURL(page, short)
+                      .then((newPost)=> setCreated("true"))
+                      .catch(error => console.log(error));
+              }
 
-            <button onClick={createURL(page, short)}>Create link!</button>
-        </StyledDiv>
+              }>
+            <input
+                placeholder="full link"
+                value={page}
+                onChange={(e) => setPage(e.target.value)} //create a textbox that updates title
+            />
+            <input
+                placeholder="shortened link"
+                value={short}
+                onChange={(e) => setShort(e.target.value)}
+            />
+            <h1>Create a shortened URL for any page!</h1>
+            <div className="w-full flex justify-center">
+                <button
+                    type="submit"
+                >
+                    Create
+                </button>
+            </div>
+            <h3> Page Created:
+                {created}
+            </h3>
+
+        </form>
     )
 }

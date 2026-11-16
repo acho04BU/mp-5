@@ -1,5 +1,8 @@
-import {MongoClient,Db,Collection} from 'mongodb';
+"use server"
 
+import {MongoClient,Db,Collection} from 'mongodb';
+import {URLProps} from "@/types";
+import {redirect} from "next/navigation";
 const MONGO_URI = process.env.MONGO_URI as string;
 
 if (!MONGO_URI) {
@@ -7,8 +10,6 @@ if (!MONGO_URI) {
 }
 
 const DB_NAME = "cs303-mp-5";
-export const URL_COLLECTION = "url-collection";
-
 let client:MongoClient | null = null;
 
 let db: Db | null = null;
@@ -28,4 +29,25 @@ export default async function getCollection(
         db = await connect();
     }
     return db.collection(collectionName);
+}
+
+
+
+export async function goToPage(page:string){
+    const URLCollection = await getCollection("url-collection");
+    const data = await URLCollection.find().toArray();
+
+    const urls: URLProps[] = data.map ((p) => ({
+        original:p.original,
+        short:p.short
+    }))
+
+    let i = 0;
+    for (i = 0; i < urls.length; i++) {
+        if (urls[i].short === page) {
+            redirect(urls[i].original);
+        }
+    }
+
+    throw new Error ("Page Not Found");
 }
