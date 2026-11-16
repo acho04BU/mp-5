@@ -10,6 +10,5 @@ export default async function Page({
 
     await goToPage(page);
 
-    return null;
 }
 
