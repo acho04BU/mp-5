@@ -22,14 +22,14 @@ export default async function createURL(original:string,short:string){
 
     try{
         let x = new URL(original);
-        const res = await postsCollection.insertOne({original,short});
-        if (!res.acknowledged) {
-            throw new Error("DB insert failed");
-        }
+    }catch(err){
+        console.log(err);
     }
-    catch(err){
-        throw new Error ("Invalid URL");
+    const res = await postsCollection.insertOne({original,short});
+    if (!res.acknowledged) {
+        throw new Error("DB insert failed");
     }
+
 
 
 
