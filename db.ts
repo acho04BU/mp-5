@@ -39,10 +39,11 @@ export async function goToPage(page:string){
         original:p.original,
         short:p.short
     }))
-
+    console.log(page.toLowerCase());
     let i = 0;
     for (i = 0; i < urls.length; i++) {
-        if (urls[i].short === page) {
+        console.log(urls[i].short + " ASDF");
+        if (urls[i].short === (page.toLowerCase())) {
             redirect(urls[i].original);
         }
     }
